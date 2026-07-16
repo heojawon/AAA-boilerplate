@@ -8,14 +8,14 @@ function App() {
 
 export default App;
 
-import CreateWithEmailAndPassword from "./features/auth/create/CreateUserWithEmailAndPassword";
-import SignInWithEmailAndPassword from "./features/auth/login/SignInWithEmailAndPassword";
+import CreateWithEmailAndPassword from "./utils/auth/create_delete/CreateUserWithEmailAndPassword";
+import SignInWithEmailAndPassword from "./utils/auth/login/SignInWithEmailAndPassword";
 
 import {
     HandleGoogleRedirectResult,
     SignInWithGooglePopup,
     SignInWithGoogleRedirect,
-} from "./features/auth/Provider/Google";
+} from "./utils/auth/Provider/Google";
 
 export function Main() {
     const email = "111@test.com";
