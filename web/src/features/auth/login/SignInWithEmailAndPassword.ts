@@ -12,18 +12,18 @@ export default async function SignInWithEmailAndPassword(
 ): Promise<UserCredential> {
     try {
         runtimeMeasureStart("login");
-        logger("LoginService", "info", "로그인 시도...");
+        logger("UserAuthService", "info", "로그인 시도...");
         const userCredential = await signInWithEmailAndPassword(
             auth,
             email,
             password,
         );
-        logger("LoginService", "info", "로그인에 성공하였습니다.");
+        logger("UserAuthService", "info", "로그인에 성공하였습니다.");
         runtimeMeasureEnd("login");
         return userCredential;
     } catch (error: any) {
         logger(
-            "LoginService",
+            "UserAuthService",
             "error",
             "로그인에 실패하였습니다:",
             error.message,

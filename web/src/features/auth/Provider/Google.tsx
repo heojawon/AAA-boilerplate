@@ -31,18 +31,18 @@ export async function SignInWithGooglePopup(): Promise<UserCredential> {
     try {
         runtimeMeasureStart("google-popup");
 
-        logger("GoogleAuthService", "info", "Google Popup 로그인 시도...");
+        logger("UserAuthService", "info", "Google Popup 로그인 시도...");
 
         const userCredential = await signInWithPopup(auth, provider);
 
-        logger("GoogleAuthService", "info", "Google Popup 로그인 성공");
+        logger("UserAuthService", "info", "Google Popup 로그인 성공");
 
         runtimeMeasureEnd("google-popup");
 
         return userCredential;
     } catch (error: any) {
         logger(
-            "GoogleAuthService",
+            "UserAuthService",
             "error",
             "Google Popup 로그인 실패",
             error.message,
@@ -60,14 +60,14 @@ export async function SignInWithGoogleRedirect(): Promise<void> {
     try {
         runtimeMeasureStart("google-redirect");
 
-        logger("GoogleAuthService", "info", "Google Redirect 로그인 시도...");
+        logger("UserAuthService", "info", "Google Redirect 로그인 시도...");
 
         await signInWithRedirect(auth, provider);
 
         // Redirect가 발생하므로 아래 코드는 실행되지 않음.
     } catch (error: any) {
         logger(
-            "GoogleAuthService",
+            "UserAuthService",
             "error",
             "Google Redirect 로그인 실패",
             error.message,
@@ -88,21 +88,21 @@ export async function HandleGoogleRedirectResult(): Promise<UserCredential | nul
         const result = await getRedirectResult(auth);
 
         if (!result) {
-            logger("GoogleAuthService", "info", "Redirect 결과가 없습니다.");
+            logger("UserAuthService", "info", "Redirect 결과가 없습니다.");
 
             runtimeMeasureEnd("google-result");
 
             return null;
         }
 
-        logger("GoogleAuthService", "info", "Google Redirect 로그인 성공");
+        logger("UserAuthService", "info", "Google Redirect 로그인 성공");
 
         runtimeMeasureEnd("google-result");
 
         return result;
     } catch (error: any) {
         logger(
-            "GoogleAuthService",
+            "UserAuthService",
             "error",
             "Redirect 결과 처리 실패",
             error.message,

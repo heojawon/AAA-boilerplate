@@ -14,15 +14,15 @@ export default async function DeleteUser(): Promise<void> {
 
         runtimeMeasureStart("delete-user");
 
-        logger("DeleteUserService", "info", "회원 탈퇴 시도...");
+        logger("UserService", "info", "회원 탈퇴 시도...");
 
         await deleteUser(auth.currentUser);
 
-        logger("DeleteUserService", "info", "회원 탈퇴 완료");
+        logger("UserService", "info", "회원 탈퇴 완료");
 
         runtimeMeasureEnd("delete-user");
     } catch (error: any) {
-        logger("DeleteUserService", "error", "회원 탈퇴 실패", error.message);
+        logger("UserService", "error", "회원 탈퇴 실패", error.message);
 
         runtimeMeasureEnd("delete-user");
         throw error;

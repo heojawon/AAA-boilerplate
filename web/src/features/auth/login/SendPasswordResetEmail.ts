@@ -12,12 +12,12 @@ export default async function SendPasswordResetEmail(
     try {
         runtimeMeasureStart("password-reset");
 
-        logger("PasswordResetService", "info", "비밀번호 재설정 메일 전송...");
+        logger("UserAuthService", "info", "비밀번호 재설정 메일 전송...");
 
         await sendPasswordResetEmail(auth, email);
 
         logger(
-            "PasswordResetService",
+            "UserAuthService",
             "info",
             "비밀번호 재설정 메일을 전송했습니다.",
         );
@@ -25,7 +25,7 @@ export default async function SendPasswordResetEmail(
         runtimeMeasureEnd("password-reset");
     } catch (error: any) {
         logger(
-            "PasswordResetService",
+            "UserAuthService",
             "error",
             "비밀번호 재설정 메일 전송 실패",
             error.message,

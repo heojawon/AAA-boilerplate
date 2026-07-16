@@ -15,18 +15,18 @@ export default async function CreateWithEmailAndPassword(
 ): Promise<UserCredential> {
     try {
         runtimeMeasureStart("create");
-        logger("CreateUserService", "info", "계정 생성 시도...");
+        logger("UserAuthService", "info", "계정 생성 시도...");
         const userCredential = await createUserWithEmailAndPassword(
             auth,
             email,
             password,
         );
-        logger("CreateUserService", "info", "생성에 성공하였습니다.");
+        logger("UserAuthService", "info", "생성에 성공하였습니다.");
         runtimeMeasureEnd("create");
         return userCredential;
     } catch (error: any) {
         logger(
-            "CreateUserService",
+            "UserAuthService",
             "error",
             "계정 생성에 실패하였습니다.",
             error.message,

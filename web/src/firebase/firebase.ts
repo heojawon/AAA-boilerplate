@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,6 +22,10 @@ const app = initializeApp(firebaseConfig);
 
 // firestore 서비스 연결
 export const db = getFirestore(app);
+
+// const testCollection = collection(db, "test"); // 컬렉션 참조
+
+// const collectionName = collection(db, "main"); // 컬렉션 참조
 
 export const auth = getAuth(app);
 

@@ -17,18 +17,18 @@ export default async function UpdateProfile(
 
         runtimeMeasureStart("update-profile");
 
-        logger("ProfileService", "info", "프로필 수정 시도...");
+        logger("UserService", "info", "프로필 수정 시도...");
 
         await updateProfile(auth.currentUser, {
             displayName,
             photoURL,
         });
 
-        logger("ProfileService", "info", "프로필 수정 완료");
+        logger("UserService", "info", "프로필 수정 완료");
 
         runtimeMeasureEnd("update-profile");
     } catch (error: any) {
-        logger("ProfileService", "error", "프로필 수정 실패", error.message);
+        logger("UserService", "error", "프로필 수정 실패", error.message);
 
         runtimeMeasureEnd("update-profile");
         throw error;
