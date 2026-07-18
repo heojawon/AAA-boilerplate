@@ -21,12 +21,12 @@ export default async function SignInWithEmailAndPassword(
         logger("UserAuthService", "info", "로그인에 성공하였습니다.");
         runtimeMeasureEnd("login");
         return userCredential;
-    } catch (error: any) {
+    } catch (error: unknown) {
         logger(
             "UserAuthService",
             "error",
             "로그인에 실패하였습니다:",
-            error.message,
+            (error as Error).message,
         );
 
         runtimeMeasureEnd("login");

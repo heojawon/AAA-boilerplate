@@ -6,6 +6,7 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
 } from "firebase/auth";
+import type { User } from "firebase/auth";
 import {
     Mail,
     Lock,
@@ -19,7 +20,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 interface WelcomeProps {
     onStartSignUp: () => void;
-    onLoginSuccess: (user: any) => void;
+    onLoginSuccess: (user: User) => void;
 }
 
 export default function Welcome({
@@ -50,15 +51,17 @@ export default function Welcome({
                 password,
             );
             onLoginSuccess(userCredential.user);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error("Login error:", err);
             if (
-                err.code === "auth/user-not-found" ||
-                err.code === "auth/wrong-password" ||
-                err.code === "auth/invalid-credential"
+                (err as { code?: string }).code === "auth/user-not-found" ||
+                (err as { code?: string }).code === "auth/wrong-password" ||
+                (err as { code?: string }).code === "auth/invalid-credential"
             ) {
                 setError("이메일 또는 비밀번호가 올바르지 않습니다.");
-            } else if (err.code === "auth/invalid-email") {
+            } else if (
+                (err as { code?: string }).code === "auth/invalid-email"
+            ) {
                 setError("유효하지 않은 이메일 형식입니다.");
             } else {
                 setError(
@@ -82,15 +85,21 @@ export default function Welcome({
         setLoading(true);
         try {
             await SendPasswordResetEmail(email);
-            setResetSuccess("비밀번호 재설정 메일이 전송되었습니다. 메일함을 확인해 주세요.");
-        } catch (err: any) {
+            setResetSuccess(
+                "비밀번호 재설정 메일이 전송되었습니다. 메일함을 확인해 주세요.",
+            );
+        } catch (err: unknown) {
             console.error("Password reset error:", err);
-            if (err.code === "auth/user-not-found") {
+            if ((err as { code?: string }).code === "auth/user-not-found") {
                 setError("가입되지 않은 이메일입니다.");
-            } else if (err.code === "auth/invalid-email") {
+            } else if (
+                (err as { code?: string }).code === "auth/invalid-email"
+            ) {
                 setError("유효하지 않은 이메일 형식입니다.");
             } else {
-                setError("메일 전송 중 오류가 발생했습니다. 다시 시도해 주세요.");
+                setError(
+                    "메일 전송 중 오류가 발생했습니다. 다시 시도해 주세요.",
+                );
             }
         } finally {
             setLoading(false);
@@ -105,23 +114,28 @@ export default function Welcome({
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
             onLoginSuccess(result.user);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error("Google auth error:", err);
-            if (err.code === "auth/popup-blocked") {
+            if ((err as { code?: string }).code === "auth/popup-blocked") {
                 setError(
                     "브라우저에서 팝업이 차단되어 Google 로그인을 완료할 수 없어요.",
                 );
                 setProviderNotice(
                     "구글 로그인 이용이 불가능하면 아래 이메일 로그인으로 계속해 주세요.",
                 );
-            } else if (err.code === "auth/network-request-failed") {
+            } else if (
+                (err as { code?: string }).code ===
+                "auth/network-request-failed"
+            ) {
                 setError(
                     "네트워크 연결이 불안정해 Google 로그인에 실패했어요.",
                 );
                 setProviderNotice(
                     "잠시 후 다시 시도하거나 아래 이메일 로그인으로 이어가 주세요.",
                 );
-            } else if (err.code !== "auth/popup-closed-by-user") {
+            } else if (
+                (err as { code?: string }).code !== "auth/popup-closed-by-user"
+            ) {
                 setError("Google 로그인에 실패했습니다.");
                 setProviderNotice(
                     "구글 로그인 이용이 불가능하면 아래 이메일 로그인으로 계속해 주세요.",
@@ -146,7 +160,7 @@ export default function Welcome({
                         transition={{ duration: 0.5, type: "spring" }}
                         className="inline-flex p-4 rounded-3xl text-on-primary-container shadow-xl shadow-primary-container/20 mx-auto"
                     >
-                        <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-emerald-500 to-teal-400 text-slate-950 flex items-center justify-center font-extrabold text-lg shadow-md shadow-emerald-500/10 transition-transform group-hover:scale-105">
+                        <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-primary to-primary-light text-slate-950 flex items-center justify-center font-extrabold text-lg shadow-md shadow-primary/10 transition-transform group-hover:scale-105">
                             M
                         </div>
                     </motion.div>
@@ -201,7 +215,9 @@ export default function Welcome({
                                         id="login-error-box"
                                     >
                                         <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                                        <span className="leading-normal">{error}</span>
+                                        <span className="leading-normal">
+                                            {error}
+                                        </span>
                                     </div>
                                 )}
 
@@ -228,7 +244,9 @@ export default function Welcome({
                                             type="email"
                                             required
                                             value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
+                                            onChange={(e) =>
+                                                setEmail(e.target.value)
+                                            }
                                             placeholder="name@school.com"
                                             className="w-full bg-surface border border-outline-variant rounded-xl py-3 pl-10 pr-4 text-sm font-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-container transition-all"
                                         />
@@ -315,20 +333,25 @@ export default function Welcome({
                                 </div>
 
                                 <p className="text-xs text-on-surface-variant font-body-md leading-relaxed">
-                                    가입하신 이메일 주소를 입력하시면 비밀번호 재설정 링크를 보내드립니다.
+                                    가입하신 이메일 주소를 입력하시면 비밀번호
+                                    재설정 링크를 보내드립니다.
                                 </p>
 
                                 {error && (
                                     <div className="bg-error-container/20 border border-error/20 p-3.5 rounded-xl flex items-start gap-2.5 text-error text-xs font-body-md">
                                         <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                                        <span className="leading-normal">{error}</span>
+                                        <span className="leading-normal">
+                                            {error}
+                                        </span>
                                     </div>
                                 )}
 
                                 {resetSuccess && (
-                                    <div className="bg-emerald-50 border border-emerald-200 p-3.5 rounded-xl flex items-start gap-2.5 text-emerald-700 text-xs font-body-md">
+                                    <div className="bg-primary/10 border border-primary/20 p-3.5 rounded-xl flex items-start gap-2.5 text-primary-dark text-xs font-body-md">
                                         <CheckCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                                        <span className="leading-normal">{resetSuccess}</span>
+                                        <span className="leading-normal">
+                                            {resetSuccess}
+                                        </span>
                                     </div>
                                 )}
 
@@ -346,7 +369,9 @@ export default function Welcome({
                                             type="email"
                                             required
                                             value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
+                                            onChange={(e) =>
+                                                setEmail(e.target.value)
+                                            }
                                             placeholder="name@school.com"
                                             className="w-full bg-surface border border-outline-variant rounded-xl py-3 pl-10 pr-4 text-sm font-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-container transition-all"
                                         />
@@ -364,7 +389,9 @@ export default function Welcome({
                                     ) : (
                                         <>
                                             <Mail className="h-4 w-4" />
-                                            <span>비밀번호 재설정 메일 받기</span>
+                                            <span>
+                                                비밀번호 재설정 메일 받기
+                                            </span>
                                         </>
                                     )}
                                 </button>

@@ -8,19 +8,41 @@
     --font-display: "Plus Jakarta Sans", sans-serif;
     --font-mono: "Lexend", monospace;
 
-    /* Primary and Accent colors */
-    --color-primary: #006d36;
+    /* Brand color */
+    --color-primary: #10b981;
     --color-on-primary: #ffffff;
-    --color-primary-container: #4ade80;
-    --color-on-primary-container: #005e2d;
-    --color-primary-fixed-dim: #4de082;
-    --color-secondary: #944a00;
+    --color-primary-container: #d1fae5;
+    --color-on-primary-container: #064e3b;
+    --color-primary-fixed-dim: #34d399;
+    --color-primary-fixed: #6ee7b7;
+    --color-on-primary-fixed-variant: #065f46;
+    --color-on-primary-fixed: #052e16;
+    --color-inverse-primary: #6ee7b7;
+
+    --color-secondary: #10b981;
     --color-on-secondary: #ffffff;
-    --color-secondary-container: #fd933d;
-    --color-on-secondary-container: #693300;
+    --color-secondary-container: #d1fae5;
+    --color-on-secondary-container: #064e3b;
+    --color-secondary-fixed: #ecfdf5;
+    --color-secondary-fixed-dim: #a7f3d0;
+    --color-on-secondary-fixed: #052e16;
+    --color-on-secondary-fixed-variant: #065f46;
+
+    --color-tertiary: #10b981;
+    --color-on-tertiary: #ffffff;
+    --color-tertiary-container: #d1fae5;
+    --color-on-tertiary-container: #064e3b;
+    --color-tertiary-fixed: #ecfdf5;
+    --color-tertiary-fixed-dim: #a7f3d0;
+    --color-on-tertiary-fixed: #052e16;
+    --color-on-tertiary-fixed-variant: #065f46;
+
     --color-background: #f7f9fb;
     --color-on-background: #191c1e;
+
+    --color-surface: #f7f9fb;
     --color-surface-bright: #f7f9fb;
+    --color-surface-dim: #d8dadc;
     --color-surface-container-lowest: #ffffff;
     --color-surface-container-low: #f2f4f6;
     --color-surface-container: #eceef0;
@@ -28,10 +50,27 @@
     --color-surface-container-highest: #e0e3e5;
     --color-on-surface: #191c1e;
     --color-on-surface-variant: #3d4a3e;
+    --color-surface-variant: #e0e3e5;
+    --color-surface-tint: #006d36;
+    --color-inverse-surface: #2d3133;
+    --color-inverse-on-surface: #eff1f3;
+
     --color-outline: #6d7b6d;
     --color-outline-variant: #bccabb;
+
     --color-error: #ba1a1a;
+    --color-on-error: #ffffff;
     --color-error-container: #ffdad6;
+    --color-on-error-container: #93000a;
+
+    /* Spacing */
+    --spacing-stack-lg: 48px;
+    --spacing-stack-md: 24px;
+    --spacing-base: 8px;
+    --spacing-container-padding-desktop: 40px;
+    --spacing-gutter: 16px;
+    --spacing-container-padding-mobile: 20px;
+    --spacing-stack-sm: 12px;
 }
 
 body {

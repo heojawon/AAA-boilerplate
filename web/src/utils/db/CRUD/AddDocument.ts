@@ -31,8 +31,8 @@ export default async function AddDocument(
         runtimeMeasureEnd("firestore-add");
 
         return docRef;
-    } catch (error: any) {
-        logger("FirestoreService", "error", "문서 생성 실패", error.message);
+    } catch (error: unknown) {
+        logger("FirestoreService", "error", "문서 생성 실패", (error as Error).message);
 
         runtimeMeasureEnd("firestore-add");
         throw error;

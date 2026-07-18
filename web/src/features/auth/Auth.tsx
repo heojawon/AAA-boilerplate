@@ -6,10 +6,8 @@ import {
     type User as FirebaseUser,
 } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import type { UserDocument } from "./types";
 import Welcome from "./components/Welcome";
 import SignUpWizard from "./components/SignUpWizard";
-import Footer from "../../components/Footer";
 import { Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useNavigate } from "react-router";
@@ -17,11 +15,12 @@ import { useNavigate } from "react-router";
 type AppView = "welcome" | "signup" | "dashboard";
 
 export default function Auth() {
-    window.document.title = "MoveUp - 계정 인증";
+    useEffect(() => {
+        window.document.title = "MoveUp - 계정 인증";
+    }, []);
     const navigator = useNavigate();
 
     const [view, setView] = useState<AppView>("welcome");
-    const [userDoc, setUserDoc] = useState<UserDocument | null>(null);
     const [authLoading, setAuthLoading] = useState(true);
 
     // Keep track of authenticated google user who hasn't completed signup
@@ -29,13 +28,13 @@ export default function Auth() {
         email: string;
         uid: string;
     } | null>(null);
-    const [loadingStatus, setLoadingStatus] =
-        useState("인증 시스템을 초기화하는 중...");
+    const [loadingStatus, setLoadingStatus] = useState(
+        "인증 세션을 확인하고 있습니다...",
+    );
     const [showBypassBtn, setShowBypassBtn] = useState(false);
 
     useEffect(() => {
         console.log("App.tsx: Registering auth observer");
-        setLoadingStatus("인증 세션을 확인하고 있습니다...");
 
         // Set a button display timeout if it takes too long
         const btnTimeout = setTimeout(() => {
@@ -74,8 +73,7 @@ export default function Auth() {
 
                         if (docSnap && docSnap.exists()) {
                             console.log("App.tsx: Profile loaded successfully");
-                            setUserDoc(docSnap.data() as UserDocument);
-                            setView("dashboard");
+                            navigator("/dashboard");
                             setGoogleUser(null);
                         } else {
                             console.log(
@@ -96,13 +94,11 @@ export default function Auth() {
                         setLoadingStatus(
                             "프로필을 불러오지 못했습니다. 새로 로그인해 주세요.",
                         );
-                        setUserDoc(null);
                         setGoogleUser(null);
                         setView("welcome");
                     }
                 } else {
                     console.log("App.tsx: No authenticated user");
-                    setUserDoc(null);
                     setGoogleUser(null);
                     setView("welcome");
                 }
@@ -122,14 +118,13 @@ export default function Auth() {
             unsubscribe();
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [navigator]);
 
     const handleLogout = async () => {
         setAuthLoading(true);
         setLoadingStatus("로그아웃 처리 중...");
         try {
             await signOut(auth);
-            setUserDoc(null);
             setGoogleUser(null);
             setView("welcome");
         } catch (err) {
@@ -139,10 +134,9 @@ export default function Auth() {
         }
     };
 
-    const handleSignUpSuccess = (newUserDoc: UserDocument) => {
-        setUserDoc(newUserDoc);
+    const handleSignUpSuccess = () => {
         setGoogleUser(null);
-        setView("dashboard");
+        navigator("/dashboard");
     };
 
     const handleLoginSuccess = async (user: FirebaseUser) => {
@@ -151,8 +145,7 @@ export default function Auth() {
             const docRef = doc(db, "users", user.uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                setUserDoc(docSnap.data() as UserDocument);
-                setView("dashboard");
+                navigator("/dashboard");
             } else {
                 setGoogleUser({
                     email: user.email || "",
@@ -256,15 +249,7 @@ export default function Auth() {
                     </motion.div>
                 )}
 
-                {view === "dashboard" && userDoc && (
-                    <motion.div
-                        key="dashboard-view"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                    ></motion.div>
-                )}
+                {/* Dashboard view removed as it navigates directly to /dashboard */}
             </AnimatePresence>
         </div>
     );

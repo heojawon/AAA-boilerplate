@@ -1,11 +1,11 @@
 export default function NotFound() {
     return (
-        <div className="flex min-h-screen flex-col bg-[#F9F9FF] text-[#141B2B] selection:bg-emerald-500 selection:text-white">
+        <div className="flex min-h-screen flex-col bg-[#F9F9FF] text-[#141B2B] selection:bg-primary selection:text-white">
             {/* Main */}
             <main className="flex min-h-[110vh] flex-1 items-center justify-center px-6 pt-24 pb-16">
                 <div className="w-full max-w-4xl text-center">
                     <div className="mb-12 -mt-30">
-                        <h1 className="text-[170px] font-extrabold leading-none tracking-tight text-emerald-600/15 md:text-[200px]">
+                        <h1 className="text-[170px] font-extrabold leading-none tracking-tight text-primary/15 md:text-[200px]">
                             404
                         </h1>
                     </div>
@@ -20,7 +20,7 @@ export default function NotFound() {
 
                     <a
                         href="/"
-                        className="inline-flex items-center rounded-full bg-[#005236] px-8 py-3.5 font-semibold text-white shadow-sm transition hover:opacity-90 active:scale-95"
+                        className="inline-flex items-center rounded-full bg-primary px-8 py-3.5 font-semibold text-on-primary shadow-sm transition hover:bg-primary-dark active:scale-95"
                     >
                         ← 돌아가기
                     </a>
@@ -31,7 +31,7 @@ export default function NotFound() {
             <footer className="border-t border-slate-200 bg-white py-12">
                 <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 px-8 md:flex-row">
                     <div className="text-center md:text-left">
-                        <h3 className="text-lg font-bold text-emerald-600">
+                        <h3 className="text-lg font-bold text-primary">
                             MoveUp
                         </h3>
 
@@ -43,24 +43,15 @@ export default function NotFound() {
                     </div>
 
                     <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-500">
-                        <a
-                            href="#"
-                            className="transition hover:text-emerald-600"
-                        >
+                        <a href="#" className="transition hover:text-primary">
                             Privacy Policy
                         </a>
 
-                        <a
-                            href="#"
-                            className="transition hover:text-emerald-600"
-                        >
+                        <a href="#" className="transition hover:text-primary">
                             Terms of Service
                         </a>
 
-                        <a
-                            href="#"
-                            className="transition hover:text-emerald-600"
-                        >
+                        <a href="#" className="transition hover:text-primary">
                             SDG Framework
                         </a>
                     </div>

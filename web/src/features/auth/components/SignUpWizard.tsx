@@ -12,11 +12,9 @@ import {
     Sparkles,
     Check,
     Mail,
-    Lock,
     User,
     Activity,
     Heart,
-    RefreshCw,
     Footprints,
     Brain,
     ChevronRight,
@@ -26,7 +24,7 @@ import { Link } from "react-router";
 
 interface SignUpWizardProps {
     onCancel: () => void;
-    onSuccess: (userDoc: UserDocument) => void;
+    onSuccess: () => void;
     googleUser?: { email: string; uid: string } | null;
 }
 
@@ -36,7 +34,7 @@ export default function SignUpWizard({
     googleUser = null,
 }: SignUpWizardProps) {
     const [step, setStep] = useState(googleUser ? 2 : 1);
-    const [loading, setLoading] = useState(false);
+    const [, setLoading] = useState(false);
     const [error, setError] = useState("");
 
     // Step 1: Account
@@ -68,10 +66,10 @@ export default function SignUpWizard({
     const [interests, setInterests] = useState<string[]>([]);
 
     // Step 6: Notifications
-    const [notifQuests, setNotifQuests] = useState(true);
-    const [notifExercise, setNotifExercise] = useState(true);
-    const [notifStretch, setNotifStretch] = useState(true);
-    const [notifWater, setNotifWater] = useState(true);
+    const [notifQuests] = useState(true);
+    const [notifExercise] = useState(true);
+    const [notifStretch] = useState(true);
+    const [notifWater] = useState(true);
 
     // Step 7: Personal Health Goals (AI suggestions addition)
     const [healthGoal, setHealthGoal] = useState("운동 습관을 만들고 싶어요");
@@ -310,24 +308,30 @@ export default function SignUpWizard({
             // Delay a little bit to showcase the AI screen
             setTimeout(() => {
                 setLoading(false);
-                onSuccess(userDocument);
+                onSuccess();
             }, 2500);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error("Sign up failure:", err);
             logger(
                 "AuthSignup",
                 "error",
                 "회원가입 처리 실패",
-                err?.message || "unknown-error",
+                err instanceof Error ? err.message : "unknown-error",
             );
             // Revert from AI screen to the final form step if error occurs
             setStep(6);
             setLoading(false);
-            if (err.code === "auth/email-already-in-use") {
+            if (
+                (err as { code?: string }).code === "auth/email-already-in-use"
+            ) {
                 setError("이미 사용 중인 이메일 주소입니다.");
-            } else if (err.code === "auth/invalid-email") {
+            } else if (
+                (err as { code?: string }).code === "auth/invalid-email"
+            ) {
                 setError("유효하지 않은 이메일 형식입니다.");
-            } else if (err.code === "auth/weak-password") {
+            } else if (
+                (err as { code?: string }).code === "auth/weak-password"
+            ) {
                 setError("비밀번호가 너무 취약합니다.");
             } else {
                 setError(
@@ -680,7 +684,10 @@ export default function SignUpWizard({
                                                 type="button"
                                                 onClick={() =>
                                                     setExerciseLevel(
-                                                        freq.id as any,
+                                                        freq.id as
+                                                            | "low"
+                                                            | "medium"
+                                                            | "high",
                                                     )
                                                 }
                                                 className={`w-full p-3.5 rounded-xl border text-left transition-all flex items-start gap-3 ${

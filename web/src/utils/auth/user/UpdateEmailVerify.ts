@@ -21,8 +21,8 @@ export default async function UpdateEmail(newEmail: string): Promise<void> {
         logger("UserService", "info", "인증 메일을 전송했습니다.");
 
         runtimeMeasureEnd("update-email");
-    } catch (error: any) {
-        logger("UserService", "error", "이메일 변경 실패", error.message);
+    } catch (error: unknown) {
+        logger("UserService", "error", "이메일 변경 실패", (error as Error).message);
 
         runtimeMeasureEnd("update-email");
         throw error;

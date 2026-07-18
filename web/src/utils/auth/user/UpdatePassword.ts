@@ -23,8 +23,8 @@ export default async function UpdatePassword(
         logger("UserService", "info", "비밀번호 변경 완료.");
 
         runtimeMeasureEnd("update-password");
-    } catch (error: any) {
-        logger("UserService", "error", "비밀번호 변경 실패", error.message);
+    } catch (error: unknown) {
+        logger("UserService", "error", "비밀번호 변경 실패", (error as Error).message);
 
         runtimeMeasureEnd("update-password");
         throw error;

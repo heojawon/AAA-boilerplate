@@ -25,8 +25,8 @@ export default async function SetDocument(
         logger("FirestoreService", "info", "문서 저장 완료");
 
         runtimeMeasureEnd("firestore-set");
-    } catch (error: any) {
-        logger("FirestoreService", "error", "문서 저장 실패", error.message);
+    } catch (error: unknown) {
+        logger("FirestoreService", "error", "문서 저장 실패", (error as Error).message);
 
         runtimeMeasureEnd("firestore-set");
         throw error;

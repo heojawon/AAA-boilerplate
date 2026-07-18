@@ -31,8 +31,8 @@ export default async function GetDocument(
         runtimeMeasureEnd("firestore-get");
 
         return snapshot;
-    } catch (error: any) {
-        logger("FirestoreService", "error", "문서 조회 실패", error.message);
+    } catch (error: unknown) {
+        logger("FirestoreService", "error", "문서 조회 실패", (error as Error).message);
 
         runtimeMeasureEnd("firestore-get");
         throw error;

@@ -24,12 +24,12 @@ export default async function CreateWithEmailAndPassword(
         logger("UserAuthService", "info", "생성에 성공하였습니다.");
         runtimeMeasureEnd("create");
         return userCredential;
-    } catch (error: any) {
+    } catch (error: unknown) {
         logger(
             "UserAuthService",
             "error",
             "계정 생성에 실패하였습니다.",
-            error.message,
+            (error as Error).message,
         );
         runtimeMeasureEnd("create");
         throw error;

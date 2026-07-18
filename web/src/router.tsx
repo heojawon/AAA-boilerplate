@@ -4,6 +4,7 @@ import Landingpage from "./features/Landingpage";
 import Auth from "./features/auth/Auth";
 import TermsPage from "./features/auth/components/TermsPage";
 import Dashboard from "./features/dashboard/Dashboard";
+import SettingsContainer from "./features/dashboard/settings/SettingsContainer";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
@@ -26,6 +27,16 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Dashboard />,
+            },
+        ],
+    },
+    {
+        path: "/settings",
+        element: <ProtectedRoute />,
+        children: [
+            {
+                index: true,
+                element: <SettingsContainer />,
             },
         ],
     },

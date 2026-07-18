@@ -51,9 +51,6 @@ export default function AutocompleteSchool({
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        setInputValue(value);
-    }, [value]);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {

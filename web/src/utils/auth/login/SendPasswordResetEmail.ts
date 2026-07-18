@@ -23,12 +23,12 @@ export default async function SendPasswordResetEmail(
         );
 
         runtimeMeasureEnd("password-reset");
-    } catch (error: any) {
+    } catch (error: unknown) {
         logger(
             "UserAuthService",
             "error",
             "비밀번호 재설정 메일 전송 실패",
-            error.message,
+            (error as Error).message,
         );
 
         runtimeMeasureEnd("password-reset");

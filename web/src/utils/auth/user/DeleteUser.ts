@@ -21,8 +21,8 @@ export default async function DeleteUser(): Promise<void> {
         logger("UserService", "info", "회원 탈퇴 완료");
 
         runtimeMeasureEnd("delete-user");
-    } catch (error: any) {
-        logger("UserService", "error", "회원 탈퇴 실패", error.message);
+    } catch (error: unknown) {
+        logger("UserService", "error", "회원 탈퇴 실패", (error as Error).message);
 
         runtimeMeasureEnd("delete-user");
         throw error;

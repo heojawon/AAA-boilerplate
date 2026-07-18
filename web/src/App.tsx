@@ -81,7 +81,7 @@ export function Main() {
         <div className="flex flex-col gap-4 p-6">
             <button
                 onClick={handleCreate}
-                className="rounded-lg bg-emerald-600 px-4 py-2 text-white"
+                className="rounded-lg bg-primary px-4 py-2 text-on-primary"
             >
                 테스트 회원가입
             </button>

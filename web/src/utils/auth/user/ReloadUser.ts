@@ -21,8 +21,8 @@ export default async function ReloadUser(): Promise<void> {
         logger("UserService", "info", "새로고침 완료.");
 
         runtimeMeasureEnd("reload-user");
-    } catch (error: any) {
-        logger("UserService", "error", "새로고침 실패", error.message);
+    } catch (error: unknown) {
+        logger("UserService", "error", "새로고침 실패", (error as Error).message);
 
         runtimeMeasureEnd("reload-user");
         throw error;

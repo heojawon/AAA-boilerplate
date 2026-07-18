@@ -27,25 +27,25 @@ export default {
                 // Brand
                 primary: {
                     DEFAULT: "#10B981",
-                    dark: "#006C49",
-                    light: "#6FFBBE",
+                    dark: "#047857",
+                    light: "#34D399",
                     foreground: "#FFFFFF",
-                    container: "#10B981",
-                    "container-foreground": "#00422B",
+                    container: "#D1FAE5",
+                    "container-foreground": "#064E3B",
                 },
 
                 secondary: {
-                    DEFAULT: "#2563EB",
-                    dark: "#0051D5",
+                    DEFAULT: "#10B981",
+                    dark: "#047857",
                     foreground: "#FFFFFF",
-                    container: "#316BF3",
-                    "container-foreground": "#FEFCFF",
+                    container: "#D1FAE5",
+                    "container-foreground": "#064E3B",
                 },
 
                 tertiary: {
-                    DEFAULT: "#A43A3A",
+                    DEFAULT: "#10B981",
                     foreground: "#FFFFFF",
-                    container: "#FC7C78",
+                    container: "#D1FAE5",
                 },
 
                 background: "#F9F9FF",

@@ -41,6 +41,39 @@ export interface UserDocument {
     badges: string[];
     createdAt: string;
     updatedAt: string;
+
+    // UI and sub-feature customizations (Backward compatibility + dynamic features)
+    sleepTarget?: number; // hours
+    waterTarget?: number; // glasses
+    dietPreference?: "balanced" | "low-carb" | "high-protein" | "vegan" | "keto";
+    theme?: string;
+    dashboardLayout?: string[];
+    enableAnimations?: boolean;
+    notifications?: {
+        push: boolean;
+        questReminder: boolean;
+        rankingAlert: boolean;
+        weeklyReport: boolean;
+        soundEnabled: boolean;
+        quietMode: boolean;
+        quietModeStart?: string;
+        quietModeEnd?: string;
+    };
+
+    // New tracked statistics
+    attendance?: string[]; // Dates in "YYYY-MM-DD"
+    mealLogs?: {
+        id: string;
+        type: "breakfast" | "lunch" | "dinner" | "snack";
+        name: string;
+        calories: number;
+        timestamp: string; // e.g., "08:30"
+    }[];
+    aiBriefingCache?: {
+        date: string;
+        text: string;
+    };
+    waterGlasses?: number; // number of water glasses drunk today
 }
 
 export interface DailyQuest {

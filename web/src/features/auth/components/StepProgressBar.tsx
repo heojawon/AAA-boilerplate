@@ -29,12 +29,17 @@ export default function StepProgressBar({
                 id="step-circles-row"
             >
                 {/* Background Grey Line */}
-                <div className="absolute top-[18px] left-[20px] right-[20px] h-1 bg-surface-container-highest -translate-y-1/2 z-0 rounded-full" />
+                <div
+                    className="absolute left-5 right-5 h-1 bg-surface-container-highest -translate-y-1/2 z-0 rounded-full"
+                    style={{ top: "18px", left: "20px", right: "20px" }}
+                />
 
                 {/* Active Colored Progress Line */}
                 <div
-                    className="absolute top-[18px] left-[20px] h-1 bg-primary -translate-y-1/2 z-0 transition-all duration-500 ease-out rounded-full"
+                    className="absolute h-1 bg-primary -translate-y-1/2 z-0 transition-all duration-500 ease-out rounded-full"
                     style={{
+                        top: "18px",
+                        left: "20px",
                         width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%`,
                         maxWidth: "calc(100% - 40px)",
                     }}

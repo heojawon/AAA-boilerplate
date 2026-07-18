@@ -40,12 +40,12 @@ export async function SignInWithGooglePopup(): Promise<UserCredential> {
         runtimeMeasureEnd("google-popup");
 
         return userCredential;
-    } catch (error: any) {
+    } catch (error: unknown) {
         logger(
             "UserAuthService",
             "error",
             "Google Popup 로그인 실패",
-            error.message,
+            (error as Error).message,
         );
 
         runtimeMeasureEnd("google-popup");
@@ -65,12 +65,12 @@ export async function SignInWithGoogleRedirect(): Promise<void> {
         await signInWithRedirect(auth, provider);
 
         // Redirect가 발생하므로 아래 코드는 실행되지 않음.
-    } catch (error: any) {
+    } catch (error: unknown) {
         logger(
             "UserAuthService",
             "error",
             "Google Redirect 로그인 실패",
-            error.message,
+            (error as Error).message,
         );
 
         runtimeMeasureEnd("google-redirect");
@@ -100,12 +100,12 @@ export async function HandleGoogleRedirectResult(): Promise<UserCredential | nul
         runtimeMeasureEnd("google-result");
 
         return result;
-    } catch (error: any) {
+    } catch (error: unknown) {
         logger(
             "UserAuthService",
             "error",
             "Redirect 결과 처리 실패",
-            error.message,
+            (error as Error).message,
         );
 
         runtimeMeasureEnd("google-result");

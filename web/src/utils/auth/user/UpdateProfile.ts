@@ -27,8 +27,8 @@ export default async function UpdateProfile(
         logger("UserService", "info", "프로필 수정 완료");
 
         runtimeMeasureEnd("update-profile");
-    } catch (error: any) {
-        logger("UserService", "error", "프로필 수정 실패", error.message);
+    } catch (error: unknown) {
+        logger("UserService", "error", "프로필 수정 실패", (error as Error).message);
 
         runtimeMeasureEnd("update-profile");
         throw error;
