@@ -1,1 +1,66 @@
 @import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600&family=Lexend:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Plus Jakarta Sans", sans-serif;
+    --font-mono: "Lexend", monospace;
+
+    /* Primary and Accent colors */
+    --color-primary: #006d36;
+    --color-on-primary: #ffffff;
+    --color-primary-container: #4ade80;
+    --color-on-primary-container: #005e2d;
+    --color-primary-fixed-dim: #4de082;
+    --color-secondary: #944a00;
+    --color-on-secondary: #ffffff;
+    --color-secondary-container: #fd933d;
+    --color-on-secondary-container: #693300;
+    --color-background: #f7f9fb;
+    --color-on-background: #191c1e;
+    --color-surface-bright: #f7f9fb;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f2f4f6;
+    --color-surface-container: #eceef0;
+    --color-surface-container-high: #e6e8ea;
+    --color-surface-container-highest: #e0e3e5;
+    --color-on-surface: #191c1e;
+    --color-on-surface-variant: #3d4a3e;
+    --color-outline: #6d7b6d;
+    --color-outline-variant: #bccabb;
+    --color-error: #ba1a1a;
+    --color-error-container: #ffdad6;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-surface-bright);
+    color: var(--color-on-background);
+}
+
+.font-display-lg {
+    font-family: var(--font-display);
+}
+
+.font-headline-md {
+    font-family: var(--font-display);
+}
+
+.font-label-md {
+    font-family: var(--font-mono);
+}
+
+.font-label-sm {
+    font-family: var(--font-mono);
+}
+
+.progress-bar-fill {
+    transition: width 0.4s ease-in-out;
+    background: linear-gradient(
+        90deg,
+        var(--color-primary) 0%,
+        var(--color-primary-fixed-dim) 100%
+    );
+}
