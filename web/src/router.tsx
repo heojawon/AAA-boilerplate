@@ -1,11 +1,21 @@
 import { createBrowserRouter } from "react-router";
 import NotFound from "./components/NotFound";
-import { Main } from "./App";
+import Landingpage from "./features/Landingpage";
+import Auth from "./features/auth/Auth";
+import TermsPage from "./features/auth/components/TermsPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Main />,
+        element: <Landingpage />,
+    },
+    {
+        path: "/auth",
+        element: <Auth />,
+    },
+    {
+        path: "/terms",
+        element: <TermsPage />,
     },
     {
         path: "*",

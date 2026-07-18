@@ -32,12 +32,13 @@ export default function NotFound() {
                 <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 px-8 md:flex-row">
                     <div className="text-center md:text-left">
                         <h3 className="text-lg font-bold text-emerald-600">
-                            SDG Pulse
+                            MoveUp
                         </h3>
 
                         <p className="mt-2 text-sm text-slate-500">
-                            © 2024 SDG Pulse. Purposeful Precision for Global
-                            Goals.
+                            © 2024 MoveUp. All Rights Reserved. <br />
+                            MoveUp is a project that aims to promote youth
+                            wellness and help them achieve their Goals.
                         </p>
                     </div>
 
